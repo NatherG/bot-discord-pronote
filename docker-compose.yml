@@ -1,0 +1,27 @@
+version: "3"
+services:
+  web:
+    image: node
+    entrypoint: "/home/bot/start.sh"
+    volumes:
+     - "./source:/home/bot"
+    depends_on:
+     - database
+    networks:
+     - monreseau
+    
+  database:
+    image: mongo:latest
+    container_name: database
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodata:/data/db
+    networks:
+     - monreseau
+
+networks:
+  monreseau:
+
+volumes:
+  mongodata:
